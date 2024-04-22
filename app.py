@@ -8,26 +8,16 @@ load_dotenv()
 
 # Configure Streamlit page settings
 st.set_page_config(
-    page_title="Gemini-Pro Chatbot by HJP7",
+    page_title="SALU Chatbot 🤖",  # Page title
     page_icon=":alien:",  # Favicon emoji
     layout="centered",  # Page layout option
 )
 
-# Sidebar to input Google API Key
-st.sidebar.title("Gemini-Pro Configuration")
-GOOGLE_API_KEY = st.sidebar.text_input("Enter your Google API Key", type="password")
 
-# Guide for obtaining Google API Key if not available
-st.sidebar.subheader("Don't have a Google API Key?")
-st.sidebar.write("Visit [Google's Aistudio](https://aistudio.google.com/app/apikey) and log in with your Google account. Then click on 'Create API Key'.")
+GOOGLE_API_KEY = 'AIzaSyAnEKlbWIhKYku3rW2Crb_qp26D3pU_6pM'
 
 
-# Check if API key is provided
-if not GOOGLE_API_KEY:
-    st.error("Please enter your Google API Key.")
-    st.stop()
 
-# Set up Google Gemini-Pro AI model
 gen_ai.configure(api_key=GOOGLE_API_KEY)
 model = gen_ai.GenerativeModel('gemini-1.0-pro')
 
@@ -43,10 +33,10 @@ if "chat_session" not in st.session_state:
     st.session_state.chat_session = model.start_chat(history=[])
 
 # Display the chatbot's title on the page
-st.title("🤖 Gemini Pro - ChatBot")
+st.title("SALU Chatbot 🤖")
 
 # Add small text below the header
-st.markdown("Made by 😎 [Hardik](https://www.linkedin.com/in/hardikjp/)")
+st.markdown("Made with 💖 by Jeal Khan Maitlo and Team")
 
 # Display the chat history
 for message in st.session_state.chat_session.history:
@@ -54,7 +44,7 @@ for message in st.session_state.chat_session.history:
         st.markdown(message.parts[0].text)
 
 # Input field for user's message
-user_prompt = st.chat_input("Ask ✨Gemini-Pro...")
+user_prompt = st.chat_input("Ask Me anything.")
 if user_prompt:
     # Add user's message to chat and display it
     st.chat_message("user").markdown(user_prompt)
